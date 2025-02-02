@@ -13,4 +13,10 @@ local api = vim.api
 --options
 
 o.relativenumber = true
---require('nvim-tree').tab.sync.open = true
+api.nvim_create_autocmd('FileType', {
+  pattern = '*.lua',
+  callback = function()
+    require'lspconfig'.lua_ls.setup{}
+  end
+})
+
