@@ -5,18 +5,41 @@ require "nvchad.options"
 -- local o = vim.o
 -- o.cursorlineopt ='both' -- to enable cursorline!
 
-local opt = vim.opt
+--local opt = vim.opt
 local o = vim.o
-local g = vim.g
+--local g = vim.g
 local api = vim.api
 
 --options
 
 o.relativenumber = true
-api.nvim_create_autocmd('FileType', {
-  pattern = '*.lua',
-  callback = function()
-    require'lspconfig'.lua_ls.setup{}
+
+--autocmds
+
+--loads the language servers
+-- **lua_ls is loaded automatically
+local lsp = api.nvim_create_augroup("LSPLoad", {
+  clear = false,
+})
+
+--java
+api.nvim_create_autocmd("FileType", {
+  group = lsp,
+  pattern = "java",
+  callback = function ()
+    local config = {
+      cmd = {'/path/to/jdt-language-server/bin/jdtls'},
+      root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+    }
+    require('jdtls').start_or_attach(config);
   end
 })
 
+--tex
+api.nvim_create_autocmd("FileType", {
+  group = lsp,
+  pattern = {"tex", "plaintex", "bib"},
+  callback = function ()
+    require('lspconfig').texlab.setup{};
+  end
+})
