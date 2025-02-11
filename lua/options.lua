@@ -10,6 +10,14 @@ local o = vim.o
 --local g = vim.g
 local api = vim.api
 
+--new filetypes
+
+vim.filetype.add({
+  extension = {
+    h = 'h',
+  },
+})
+
 --options
 
 o.relativenumber = true
@@ -38,8 +46,17 @@ api.nvim_create_autocmd("FileType", {
 --tex
 api.nvim_create_autocmd("FileType", {
   group = lsp,
-  pattern = {"tex", "plaintex", "bib"},
+  pattern = { "tex", "plaintex", "bib" },
   callback = function ()
     require('lspconfig').texlab.setup{};
+  end
+})
+
+--c/c++
+api.nvim_create_autocmd('FileType', {
+  group = lsp,
+  pattern = { "h", "c", "cpp" },
+  callback = function ()
+    require('lspconfig').ccls.setup{};
   end
 })
