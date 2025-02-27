@@ -21,14 +21,33 @@ vim.filetype.add({
 --options
 
 o.relativenumber = true
+o.cursorlineopt = 'both'
 
---autocmds
+--cmds and autocmds
+
+api.nvim_create_user_command('Terminal', function()
+  require('nvchad.term').new {
+  pos = "sp",
+  size = 0.3,
+}
+end, {})
 
 --loads the language servers
 
 --c/c++
-require('lspconfig').ccls.setup{}
+require('lspconfig').clangd.setup{}
+
 --java
-require('lspconfig').jdtls.setup{}
+api.nvim_create_autocmd('FileType', {
+  pattern = 'java',
+  callback = function ()
+    local config = {
+    cmd = {'/usr/share/java/jdtls/bin/jdtls'},
+    root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+}
+    require('jdtls').start_or_attach(config)
+  end
+})
+
 --(la)tex
 require('lspconfig').texlab.setup{}
