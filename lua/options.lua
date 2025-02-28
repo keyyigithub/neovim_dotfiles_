@@ -34,10 +34,11 @@ end, {})
 
 --loads LSP, DAP, linters and formatters
 
---lua (LSP was loaded automatically)
+--autocmds for formatters
 api.nvim_create_autocmd("BufWritePost", {
   command = ":FormatWrite",
 })
+
 --c/c++
 require("lspconfig").clangd.setup {}
 
