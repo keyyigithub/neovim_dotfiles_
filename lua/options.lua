@@ -12,42 +12,46 @@ local api = vim.api
 
 --new filetypes
 
-vim.filetype.add({
+vim.filetype.add {
   extension = {
-    h = 'h',
+    h = "h",
   },
-})
+}
 
 --options
 
 o.relativenumber = true
-o.cursorlineopt = 'both'
+o.cursorlineopt = "both"
 
 --cmds and autocmds
 
-api.nvim_create_user_command('Terminal', function()
-  require('nvchad.term').new {
-  pos = "sp",
-  size = 0.3,
-}
+api.nvim_create_user_command("Terminal", function()
+  require("nvchad.term").new {
+    pos = "sp",
+    size = 0.3,
+  }
 end, {})
 
---loads the language servers
+--loads LSP, DAP, linters and formatters
 
+--lua (LSP was loaded automatically)
+api.nvim_create_autocmd("BufWritePost", {
+  command = ":FormatWrite",
+})
 --c/c++
-require('lspconfig').clangd.setup{}
+require("lspconfig").clangd.setup {}
 
 --java
-api.nvim_create_autocmd('FileType', {
-  pattern = 'java',
-  callback = function ()
+api.nvim_create_autocmd("FileType", {
+  pattern = "java",
+  callback = function()
     local config = {
-    cmd = {'/usr/share/java/jdtls/bin/jdtls'},
-    root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
-}
-    require('jdtls').start_or_attach(config)
-  end
+      cmd = { "/usr/share/java/jdtls/bin/jdtls" },
+      root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
+    }
+    require("jdtls").start_or_attach(config)
+  end,
 })
 
 --(la)tex
-require('lspconfig').texlab.setup{}
+require("lspconfig").texlab.setup {}
