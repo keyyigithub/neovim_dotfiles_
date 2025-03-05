@@ -42,6 +42,9 @@ api.nvim_create_autocmd("BufWritePost", {
 --c/c++
 require("lspconfig").clangd.setup {}
 
+--cmake
+require("lspconfig").cmake.setup {}
+
 --java
 api.nvim_create_autocmd("FileType", {
   pattern = "java",
