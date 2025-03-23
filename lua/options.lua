@@ -68,3 +68,6 @@ api.nvim_create_autocmd("FileType", {
 
 --(la)tex
 require("lspconfig").texlab.setup {}
+
+--perl
+require("lspconfig").perlnavigator.setup {}
