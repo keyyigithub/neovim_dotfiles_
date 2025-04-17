@@ -15,6 +15,9 @@ return {
           cpp = {
             require("formatter.filetypes.cpp").clangformat,
           },
+          tex = {
+            require("formatter.filetypes.latex").latexindent,
+          },
           ["*"] = {
             require("formatter.filetypes.any").remove_trailing_whitespace,
           },

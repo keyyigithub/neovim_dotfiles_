@@ -14,7 +14,7 @@ local api = vim.api
 
 vim.filetype.add {
   extension = {
-    h = "h",
+    h = "c",
   },
 }
 
