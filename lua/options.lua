@@ -71,3 +71,6 @@ require("lspconfig").texlab.setup {}
 
 --perl
 require("lspconfig").perlnavigator.setup {}
+
+--shell
+require("lspconfig").bashls.setup {}
