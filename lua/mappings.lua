@@ -10,4 +10,8 @@ map("n", "<ESC><ESC>", ":noh<Return>")
 map("i", "jk", "<ESC>")
 
 map("t", "<ESC>", "<C-\\><C-N>")
+
+map("n", "<localleader>lt", function()
+  return require("vimtex.fzf-lua").run()
+end)
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
