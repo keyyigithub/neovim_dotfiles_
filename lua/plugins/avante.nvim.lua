@@ -6,12 +6,12 @@ return {
     -- add any opts here
     -- for example
     provider = "deepseek",
-    vendors = {
+    providers = {
       deepseek = {
         __inherited_from = "openai",
         api_key_name = "DEEPSEEK_API_KEY",
         endpoint = "https://api.deepseek.com/v1",
-        model = "deepseek-chat",
+        model = "deepseek-coder",
         temperature = 0,
         timeout = 30000,
         max_tokens = 8192,
