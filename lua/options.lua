@@ -25,21 +25,21 @@ o.cursorlineopt = "both"
 
 --cmds and autocmds
 
-api.nvim_create_user_command("Terminal", function()
-  local tree = require("nvim-tree.api").tree
-  if tree.is_visible() then
-    require("nvchad.term").toggle {
-      pos = "sp",
-      size = 0.3,
-      cmd = "cd " .. tree.get_nodes().absolute_path,
-    }
-  else
-    require("nvchad.term").toggle {
-      pos = "sp",
-      size = 0.3,
-    }
-  end
-end, {})
+-- api.nvim_create_user_command("Terminal", function()
+--   local tree = require("nvim-tree.api").tree
+--   if tree.is_visible() then
+--     require("nvchad.term").toggle {
+--       pos = "sp",
+--       size = 0.3,
+--       cmd = "cd " .. tree.get_nodes().absolute_path,
+--     }
+--   else
+--     require("nvchad.term").toggle {
+--       pos = "sp",
+--       size = 0.3,
+--     }
+--   end
+-- end, {})
 
 --loads LSP, DAP, linters and formatters
 
@@ -71,3 +71,6 @@ require("lspconfig").perlnavigator.setup {}
 
 --shell
 require("lspconfig").bashls.setup {}
+
+--python
+require("lspconfig").pyright.setup {}
