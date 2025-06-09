@@ -4,7 +4,7 @@ local options = {
     cpp = { "clang-format" },
     c = { "clang-format" },
     cuda = { "clang-format" },
-    tex = { "llf" },
+    tex = { "latexindent" },
   },
 
   format_on_save = {
