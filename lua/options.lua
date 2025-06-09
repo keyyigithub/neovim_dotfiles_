@@ -44,9 +44,9 @@ o.cursorlineopt = "both"
 --loads LSP, DAP, linters and formatters
 
 --autocmds for formatters
-api.nvim_create_autocmd("BufWritePost", {
-  command = ":FormatWrite",
-})
+-- api.nvim_create_autocmd("BufWritePost", {
+--   command = ":FormatWrite",
+-- })
 
 --c/c++
 require("lspconfig").clangd.setup {}
