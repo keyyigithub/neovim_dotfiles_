@@ -19,33 +19,12 @@ o.relativenumber = true
 o.cursorlineopt = "both"
 
 -- enable the python provider
-g.loaded_python3_provider = ''
-g.python3_host_prog = '/usr/bin/python'
+g.loaded_python3_provider = ""
+g.python3_host_prog = "/usr/bin/python"
 
 --cmds and autocmds
 
--- api.nvim_create_user_command("Terminal", function()
---   local tree = require("nvim-tree.api").tree
---   if tree.is_visible() then
---     require("nvchad.term").toggle {
---       pos = "sp",
---       size = 0.3,
---       cmd = "cd " .. tree.get_nodes().absolute_path,
---     }
---   else
---     require("nvchad.term").toggle {
---       pos = "sp",
---       size = 0.3,
---     }
---   end
--- end, {})
-
 --loads LSP, DAP, linters and formatters
-
---autocmds for formatters
--- api.nvim_create_autocmd("BufWritePost", {
---   command = ":FormatWrite",
--- })
 
 --c/c++
 require("lspconfig").clangd.setup {}
