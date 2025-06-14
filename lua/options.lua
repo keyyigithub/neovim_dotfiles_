@@ -26,12 +26,6 @@ g.python3_host_prog = "/usr/bin/python"
 
 --loads LSP, DAP, linters and formatters
 
---c/c++
-require("lspconfig").clangd.setup {}
-
---cmake
-require("lspconfig").cmake.setup {}
-
 --java
 api.nvim_create_autocmd("FileType", {
   pattern = "java",
@@ -43,12 +37,3 @@ api.nvim_create_autocmd("FileType", {
     require("jdtls").start_or_attach(config)
   end,
 })
-
---perl
-require("lspconfig").perlnavigator.setup {}
-
---shell
-require("lspconfig").bashls.setup {}
-
---python
-require("lspconfig").pyright.setup {}
