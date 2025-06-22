@@ -42,9 +42,8 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 return {
   name = "rime_ls",
-  -- cmd = { 'rime_ls' },
+  cmd = { "rime_ls" },
   -- cmd = { '/home/wlh/coding/rime-ls/target/debug/rime_ls' },
-  cmd = { "/usr/bin/rime_ls" },
   -- cmd = vim.lsp.rpc.connect('127.0.0.1', 9257),
 
   init_options = {
