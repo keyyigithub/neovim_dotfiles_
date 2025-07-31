@@ -17,6 +17,7 @@ vim.filetype.add {
 
 o.relativenumber = true
 o.cursorlineopt = "both"
+o.mouse = ""
 
 -- enable the python provider
 g.loaded_python3_provider = ""
