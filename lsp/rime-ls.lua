@@ -12,7 +12,7 @@ local rime_on_attach = function(client, _)
   vim.keymap.set("n", "<leader>rr", toggle_rime, { desc = "Toggle [R]ime" })
   vim.keymap.set("i", "<C-x>", toggle_rime, { desc = "Toggle Rime" })
   vim.keymap.set("n", "<leader>rs", function()
-    vim.lsp.buf.execute_command { command = "rime-ls.sync-user-data" }
+    client:exec_cmd { command = "rime-ls.sync-user-data" }
   end, { desc = "[R]ime [S]ync" })
 
   -- set trigger for different filetypes
@@ -21,10 +21,10 @@ local rime_on_attach = function(client, _)
       bufnr = vim.api.nvim_get_current_buf(),
       name = "rime_ls",
     }
-    for _, client in ipairs(clients) do
+    for _, cl in ipairs(clients) do
       local settings = { trigger_characters = trigger }
-      client.config.settings = settings
-      client.notify("workspace/didChangeConfiguration", { settings = settings })
+      cl.config.settings = settings
+      cl:notify("workspace/didChangeConfiguration", { settings = settings })
     end
   end
   local filetype = vim.bo.filetype
@@ -42,9 +42,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 return {
   name = "rime_ls",
-  cmd = { "rime_ls" },
-  -- cmd = { '/home/wlh/coding/rime-ls/target/debug/rime_ls' },
-  -- cmd = vim.lsp.rpc.connect('127.0.0.1', 9257),
+  cmd = { "/home/Jason/workspace/rime-ls/target/release/rime-ls" },
 
   init_options = {
     enabled = vim.g.rime_enabled,
