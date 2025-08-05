@@ -42,7 +42,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 return {
   name = "rime_ls",
-  cmd = { "/home/Jason/workspace/rime-ls/target/release/rime-ls" },
+  cmd = { "/home/Jason/workspace/rime-ls/target/release/rime_ls" },
 
   init_options = {
     enabled = vim.g.rime_enabled,
