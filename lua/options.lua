@@ -22,19 +22,3 @@ o.mouse = ""
 -- enable the python provider
 g.loaded_python3_provider = ""
 g.python3_host_prog = "/usr/bin/python"
-
---cmds and autocmds
-
---loads LSP, DAP, linters and formatters
-
---java
-api.nvim_create_autocmd("FileType", {
-  pattern = "java",
-  callback = function()
-    local config = {
-      cmd = { "/usr/share/java/jdtls/bin/jdtls" },
-      root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
-    }
-    require("jdtls").start_or_attach(config)
-  end,
-})
