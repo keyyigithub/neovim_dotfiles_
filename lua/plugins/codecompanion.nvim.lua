@@ -16,6 +16,9 @@ return {
               end,
             },
             schema = {
+              model = {
+                default = "deepseek-chat",
+              },
               temperature = {
                 default = 0,
               },
@@ -43,6 +46,9 @@ return {
       preview = {
         filetypes = { "markdown", "codecompanion" },
         ignore_buftypes = {},
+      },
+      experimental = {
+        check_rtp_messsage = false,
       },
     },
   },
