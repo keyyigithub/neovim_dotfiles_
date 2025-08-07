@@ -4,9 +4,27 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
+      {
+        "ravitemer/mcphub.nvim",
+        build = "bundled_build.lua", -- Bundles `mcp-hub` binary along with the neovim plugin
+        opts = {
+          use_bundled_binary = true,
+        },
+      },
     },
     -- Basic configurations
     opts = {
+      extensions = {
+        mcphub = {
+          callback = "mcphub.extensions.codecompanion",
+          opts = {
+            make_tools = true,
+            make_vars = true,
+            make_slash_commands = true,
+            show_result_in_chat = true,
+          },
+        },
+      },
       adapters = {
         deepseek = function()
           return require("codecompanion.adapters").extend("deepseek", {
@@ -37,6 +55,12 @@ return {
           adapter = "deepseek",
         },
       },
+    },
+    cmd = {
+      "CodeCompanion",
+      "CodeCompanionActions",
+      "CodeCompanionChat",
+      "CodeCompanionCmd",
     },
   },
   {
