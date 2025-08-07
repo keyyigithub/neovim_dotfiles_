@@ -10,6 +10,7 @@ return {
         opts = {
           use_bundled_binary = true,
         },
+        cmd = "MCPHub",
       },
     },
     -- Basic configurations
