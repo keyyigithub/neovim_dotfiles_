@@ -4,7 +4,7 @@ require("nvchad.configs.lspconfig").defaults()
 local lspconfig = vim.lsp
 
 -- EXAMPLE
-local servers = { "html", "cssls", "clangd", "cmake", "perlnavigator", "bashls", "pyright", "rime-ls" }
+local servers = { "html", "cssls", "clangd", "cmake", "perlnavigator", "bashls", "pyright", "rime-ls", "lemminx" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
 local custom_servers = { "rime-ls" }
