@@ -6,6 +6,7 @@ local options = {
     cuda = { "clang-format" },
     tex = { "latexindent" },
     cmake = { "cmake_format " },
+    python = { "black" },
   },
 
   format_on_save = {
