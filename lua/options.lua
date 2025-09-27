@@ -34,6 +34,7 @@ o.mouse = "a"
 
 -- Numbers
 o.number = true
+o.relativenumber = true
 o.numberwidth = 2
 o.ruler = false
 
@@ -64,10 +65,13 @@ local is_windows = vim.fn.has "win32" ~= 0
 local sep = is_windows and "\\" or "/"
 local delim = is_windows and ";" or ":"
 vim.env.PATH = table.concat({ vim.fn.stdpath "data", "mason", "bin" }, sep) .. delim .. vim.env.PATH
-o.relativenumber = true
+
 o.cursorlineopt = "both"
 o.mouse = ""
 
 -- enable the python provider
 g.loaded_python3_provider = ""
 g.python3_host_prog = "/usr/bin/python"
+
+-- vim colorscheme settings
+vim.cmd [[colorscheme tokyonight]]

@@ -1,29 +1,99 @@
 return {
+  -- status line
   {
-    "nvchad/base46",
-    build = function()
-      require("base46").load_all_highlights()
-    end,
-  },
-
-  {
-    "nvchad/ui",
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     lazy = false,
     config = function()
-      require "nvchad"
+      require("lualine").setup {
+        theme = "onedark",
+      }
     end,
   },
 
-  "nvzone/volt",
-  "nvzone/menu",
-  { "nvzone/minty", cmd = { "Huefy", "Shades" } },
+  -- buffer line
+  {
+    "romgrk/barbar.nvim",
+    dependencies = {
+      "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
+      "nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
+    },
+    init = function()
+      vim.g.barbar_auto_setup = false
+    end,
+    opts = {
+      -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+      -- animation = true,
+      -- insert_at_start = true,
+      -- …etc.
+    },
+    lazy = false,
+    version = "^1.0.0", -- optional: only update when a new 1.x version is released
+  },
+
+  -- the dashboard
+  {
+    "goolord/alpha-nvim",
+    -- dependencies = { 'echasnovski/mini.icons' },
+    dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
+    event = "VimEnter",
+    config = function()
+      local theta = require "alpha.themes.theta"
+      -- available: devicons, mini, default is mini
+      -- if provider not loaded and enabled is true, it will try to use another provider
+      theta.file_icons.providers = "devicons"
+      theta.header = require "configs.dashboard"
+      require("alpha").setup(theta.config)
+    end,
+  },
+
+  -- colorschemes
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+  {
+    "folke/trouble.nvim",
+    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>xX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>cs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>cl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>xQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
+    },
+  },
 
   {
     "nvim-tree/nvim-web-devicons",
-    opts = function()
-      dofile(vim.g.base46_cache .. "devicons")
-      return { override = require "nvchad.icons.devicons" }
-    end,
   },
 
   {

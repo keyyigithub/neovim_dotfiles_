@@ -1,4 +1,4 @@
-dofile(vim.g.base46_cache .. "cmp")
+-- dofile(vim.g.base46_cache .. "cmp")
 
 local cmp = require "cmp"
 
@@ -54,4 +54,4 @@ local options = {
   },
 }
 
-return vim.tbl_deep_extend("force", options, require "nvchad.cmp")
+return options

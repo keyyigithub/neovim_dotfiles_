@@ -17,7 +17,7 @@ M.on_attach = function(_, bufnr)
   end, opts "List workspace folders")
 
   map("n", "<leader>D", vim.lsp.buf.type_definition, opts "Go to type definition")
-  map("n", "<leader>ra", require "nvchad.lsp.renamer", opts "NvRenamer")
+  -- map("n", "<leader>ra", require "nvchad.lsp.renamer", opts "NvRenamer")
 end
 
 -- disable semanticTokens
@@ -55,7 +55,7 @@ M.capabilities.textDocument.completion.completionItem = {
 
 M.defaults = function()
   dofile(vim.g.base46_cache .. "lsp")
-  require("nvchad.lsp").diagnostic_config()
+  -- require("nvchad.lsp").diagnostic_config()
 
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
