@@ -98,4 +98,3 @@ for _, lsp in ipairs(servers) do
   })
   vim.lsp.enable(lsp)
 end
-return M
