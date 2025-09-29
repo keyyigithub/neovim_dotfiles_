@@ -1,8 +1,7 @@
-local M = {}
 local map = vim.keymap.set
 
 -- export on_attach & capabilities
-M.on_attach = function(_, bufnr)
+local on_attach = function(_, bufnr)
   local function opts(desc)
     return { buffer = bufnr, desc = "LSP " .. desc }
   end
@@ -21,7 +20,7 @@ M.on_attach = function(_, bufnr)
 end
 
 -- disable semanticTokens
-M.on_init = function(client, _)
+local _on_init = function(client, _)
   if vim.fn.has "nvim-0.11" ~= 1 then
     if client.supports_method "textDocument/semanticTokens" then
       client.server_capabilities.semanticTokensProvider = nil
@@ -33,9 +32,9 @@ M.on_init = function(client, _)
   end
 end
 
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
+local _capabilities = vim.lsp.protocol.make_client_capabilities()
 
-M.capabilities.textDocument.completion.completionItem = {
+_capabilities.textDocument.completion.completionItem = {
   documentationFormat = { "markdown", "plaintext" },
   snippetSupport = true,
   preselectSupport = true,
@@ -53,43 +52,51 @@ M.capabilities.textDocument.completion.completionItem = {
   },
 }
 
-M.defaults = function()
-  dofile(vim.g.base46_cache .. "lsp")
-  -- require("nvchad.lsp").diagnostic_config()
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    on_attach(_, args.buf)
+  end,
+})
 
-  vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(args)
-      M.on_attach(_, args.buf)
-    end,
-  })
-
-  local lua_lsp_settings = {
-    Lua = {
-      runtime = { version = "LuaJIT" },
-      workspace = {
-        library = {
-          vim.fn.expand "$VIMRUNTIME/lua",
-          vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types",
-          vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy",
-          "${3rd}/luv/library",
-        },
+local lua_lsp_settings = {
+  Lua = {
+    runtime = { version = "LuaJIT" },
+    workspace = {
+      library = {
+        vim.fn.expand "$VIMRUNTIME/lua",
+        vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types",
+        vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy",
+        "${3rd}/luv/library",
       },
     },
+  },
+}
+
+-- Support 0.10 temporarily
+
+if vim.lsp.config then
+  vim.lsp.config("*", { capabilities = _capabilities, on_init = _on_init })
+  vim.lsp.config("lua_ls", { settings = lua_lsp_settings })
+  vim.lsp.enable "lua_ls"
+else
+  require("lspconfig").lua_ls.setup {
+    capabilities = _capabilities,
+    on_init = _on_init,
+    settings = lua_lsp_settings,
   }
-
-  -- Support 0.10 temporarily
-
-  if vim.lsp.config then
-    vim.lsp.config("*", { capabilities = M.capabilities, on_init = M.on_init })
-    vim.lsp.config("lua_ls", { settings = lua_lsp_settings })
-    vim.lsp.enable "lua_ls"
-  else
-    require("lspconfig").lua_ls.setup {
-      capabilities = M.capabilities,
-      on_init = M.on_init,
-      settings = lua_lsp_settings,
-    }
-  end
 end
 
+-- EXAMPLE
+local servers = { "html", "cssls", "clangd", "cmake", "perlnavigator", "bashls", "pyright", "lemminx" }
+local nvlsp = require "configs.lspconfig"
+
+-- lsps with default config
+for _, lsp in ipairs(servers) do
+  vim.lsp.config(lsp, {
+    on_attach = nvlsp.on_attach,
+    on_init = nvlsp.on_init,
+    capabilities = nvlsp.capabilities,
+  })
+  vim.lsp.enable(lsp)
+end
 return M
