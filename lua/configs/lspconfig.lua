@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 
 -- export on_attach & capabilities
-local on_attach = function(_, bufnr)
+local _on_attach = function(_, bufnr)
   local function opts(desc)
     return { buffer = bufnr, desc = "LSP " .. desc }
   end
@@ -54,7 +54,7 @@ _capabilities.textDocument.completion.completionItem = {
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
-    on_attach(_, args.buf)
+    _on_attach(_, args.buf)
   end,
 })
 
@@ -88,14 +88,13 @@ end
 
 -- EXAMPLE
 local servers = { "html", "cssls", "clangd", "cmake", "perlnavigator", "bashls", "pyright", "lemminx" }
-local nvlsp = require "configs.lspconfig"
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
   vim.lsp.config(lsp, {
-    on_attach = nvlsp.on_attach,
-    on_init = nvlsp.on_init,
-    capabilities = nvlsp.capabilities,
+    on_attach = _on_attach,
+    on_init = _on_init,
+    capabilities = _capabilities,
   })
   vim.lsp.enable(lsp)
 end

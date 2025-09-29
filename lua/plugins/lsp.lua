@@ -17,7 +17,7 @@ return {
     "neovim/nvim-lspconfig",
     event = "User FilePost",
     config = function()
-      require "configs.lspconfig1"
+      require "configs.lspconfig"
     end,
   },
 
