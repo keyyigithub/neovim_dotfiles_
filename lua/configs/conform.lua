@@ -5,7 +5,7 @@ local options = {
     c = { "clang-format" },
     cuda = { "clang-format" },
     tex = { "latexindent" },
-    cmake = { "cmake_format " },
+    cmake = { "cmakelang" },
     python = { "black" },
   },
 
