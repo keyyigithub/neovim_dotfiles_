@@ -27,23 +27,25 @@ return {
         },
       },
       adapters = {
-        deepseek = function()
-          return require("codecompanion.adapters").extend("deepseek", {
-            env = {
-              api_key = function()
-                return os.getenv "DEEPSEEK_API_KEY"
-              end,
-            },
-            schema = {
-              model = {
-                default = "deepseek-chat",
+        http = {
+          deepseek = function()
+            return require("codecompanion.adapters").extend("deepseek", {
+              env = {
+                api_key = function()
+                  return os.getenv "DEEPSEEK_API_KEY"
+                end,
               },
-              temperature = {
-                default = 0,
+              schema = {
+                model = {
+                  default = "deepseek-chat",
+                },
+                temperature = {
+                  default = 0,
+                },
               },
-            },
-          })
-        end,
+            })
+          end,
+        },
       },
       strategies = {
         chat = {
