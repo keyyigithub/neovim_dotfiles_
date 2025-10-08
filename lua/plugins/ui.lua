@@ -81,4 +81,12 @@ return {
       "rcarriga/nvim-notify",
     },
   },
+
+  -- highlight and search for todo comments like TODO, HACK, BUG in the code base
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {},
+    event = "User FilePost",
+  },
 }
