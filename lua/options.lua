@@ -20,6 +20,9 @@ o.clipboard = "unnamedplus"
 o.cursorline = true
 o.cursorlineopt = "number"
 
+-- Winborder
+opt.winborder = "single"
+
 -- Indenting
 o.expandtab = true
 o.shiftwidth = 2
@@ -66,6 +69,7 @@ local sep = is_windows and "\\" or "/"
 local delim = is_windows and ";" or ":"
 vim.env.PATH = table.concat({ vim.fn.stdpath "data", "mason", "bin" }, sep) .. delim .. vim.env.PATH
 
+-- Mouses
 o.cursorlineopt = "both"
 o.mouse = ""
 

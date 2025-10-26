@@ -5,8 +5,11 @@ local options = {
     c = { "clang-format" },
     cuda = { "clang-format" },
     tex = { "latexindent" },
-    cmake = { "cmakelang" },
+    cmake = { "cmake_format" },
     python = { "black" },
+    bash = { "beautysh" },
+    sh = { "beautysh" },
+    zsh = { "beautysh" },
   },
 
   format_on_save = {
