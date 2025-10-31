@@ -23,6 +23,11 @@ o.cursorlineopt = "number"
 -- Winborder
 opt.winborder = "single"
 
+-- Folding
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim-treesitter#fold_expr()"
+opt.foldenable = false
+
 -- Indenting
 o.expandtab = true
 o.shiftwidth = 2

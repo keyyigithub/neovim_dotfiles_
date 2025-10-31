@@ -2,7 +2,7 @@
 
 local autocmd = vim.api.nvim_create_autocmd
 
---java
+-- java
 autocmd("FileType", {
   pattern = "java",
   callback = function()
