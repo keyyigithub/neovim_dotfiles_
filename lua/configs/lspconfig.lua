@@ -87,7 +87,7 @@ else
 end
 
 -- EXAMPLE
-local servers = { "html", "cssls", "clangd", "cmake", "perlnavigator", "bashls", "pyright", "lemminx" }
+local servers = { "html", "cssls", "clangd", "neocmake", "perlnavigator", "bashls", "pyright", "lemminx" }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
